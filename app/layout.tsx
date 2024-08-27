@@ -7,7 +7,7 @@ import { Provider } from "./providers";
 const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Worker Proposal System - WPS 1",
+  title: "Worker Proposal System - WPS 1.0.1",
   description: "",
 };
 
