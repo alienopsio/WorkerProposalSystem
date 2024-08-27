@@ -150,3 +150,5 @@ public/assets/
 
 # Tauri build artifacts
 /src-tauri/target/
+
+package-lock.json
