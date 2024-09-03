@@ -77,7 +77,7 @@ export const ArbiterVoteOptions = ({
             size="fat"
             onClick={() => handleArbiterVote("arbagree")}
           >
-            <b>AGREE!</b>
+            <b>I agree to be an Arbiter</b>
           </Button>
           {!voting && (
             <Button

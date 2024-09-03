@@ -30,7 +30,7 @@ export const ProposalCards = ({
 
   return (
     <section
-      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
+      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-2`}
     >
       {isLoading ? (
         <span>loading...</span>
@@ -42,88 +42,97 @@ export const ProposalCards = ({
               <>
                 <div
                   key={card.id}
-                  style={{ borderColor: cardColor }}
-                  className={`relative cursor-pointer border-b-[30px] border-t-8 w-[280px] 2xl:w-[386px]  bg-black/40 p-4 flex flex-col gap-4`}
+                  className={`flex cursor-pointer bg-black/40 flex-col min-h-[400px] transition-opacity`}
                   onClick={() => {
                     setIsOpen(true);
                     setSelectedCard(card);
                   }}
                 >
-                  <span className="text-3xl xl:text-4xl capitalize py-6">
-                    {card.title.slice(0, 20)}
-                  </span>
-                  <span className="text-sm xl:text-lg">
-                    {card.description.length >= 150
-                      ? card.description.slice(0, 150)
-                      : card.description}
-                  </span>
+                  <div
+                    className="flex h-2"
+                    style={{ backgroundColor: cardColor }}
+                  ></div>
+                  <div className="flex flex-col gap-4 px-2 min-h-[366px]">
+                    <div className="flex py-6 h-[120px]">
+                      <span className="flex text-3xl xl:text-4xl capitalize justify-center items-center">
+                        {card.title.slice(0, 20)}
+                      </span>
+                    </div>
+                    <span className="text-sm xl:text-lg h-[50px]">
+                      {card.description.length >= 50
+                        ? card.description.slice(0, 47) + "..."
+                        : card.description}
+                    </span>
 
-                  <div className="flex flex-col gap-2">
-                    <TextCard>
-                      <span
-                        style={{ color: cardColor }}
-                        className={`flex gap-2 text-base items-center `}
-                      >
-                        <IdIcon height={18} width={18} /> ID:
-                      </span>
+                    <div className="flex flex-col gap-2">
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <IdIcon height={18} width={18} /> ID:
+                        </span>
 
-                      <span className={`text-white font-semibold`}>
-                        {card.id.slice(0, 6)}
-                      </span>
-                    </TextCard>
-                    <TextCard>
-                      <span
-                        style={{ color: cardColor }}
-                        className={`flex gap-2 text-base items-center `}
-                      >
-                        <ByIcon height={18} width={18} /> By:
-                      </span>
+                        <span className={`text-white font-semibold`}>
+                          {card.id.slice(0, 6)}
+                        </span>
+                      </TextCard>
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <ByIcon height={18} width={18} /> By:
+                        </span>
 
-                      <span className={`text-white font-semibold`}>
-                        {card.owner}
-                      </span>
-                    </TextCard>
-                    <TextCard>
-                      <span
-                        style={{ color: cardColor }}
-                        className={`flex gap-2 text-base items-center `}
-                      >
-                        <TriangleIcon height={18} width={18} /> Cost:
-                      </span>
+                        <span className={`text-white font-semibold`}>
+                          {card.owner}
+                        </span>
+                      </TextCard>
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <TriangleIcon height={18} width={18} /> Cost:
+                        </span>
 
-                      <span className={`text-white font-semibold`}>
-                        {card.cost}
-                      </span>
-                    </TextCard>
-                    <TextCard>
-                      <span
-                        style={{ color: cardColor }}
-                        className={`flex gap-2 text-base items-center `}
-                      >
-                        <DurationIcon height={18} width={18} /> Duration:
-                      </span>
+                        <span className={`text-white font-semibold`}>
+                          {card.cost}
+                        </span>
+                      </TextCard>
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <DurationIcon height={18} width={18} /> Duration:
+                        </span>
 
-                      <span className={`text-white font-semibold`}>
-                        {moment(moment(card.duration), "YYYYMMDD").fromNow()}
-                      </span>
-                    </TextCard>
-                    <TextCard>
-                      <span
-                        style={{ color: cardColor }}
-                        className={`flex gap-2 text-base items-center `}
-                      >
-                        <VotesIcon height={18} width={18} /> Votes:
-                      </span>
+                        <span className={`text-white font-semibold`}>
+                          {moment(moment(card.duration), "YYYYMMDD").fromNow()}
+                        </span>
+                      </TextCard>
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <VotesIcon height={18} width={18} /> Votes:
+                        </span>
 
-                      <span className={`text-white font-semibold`}>
-                        {card.votes.length}/{card.votesNeeded}
-                      </span>
-                    </TextCard>
+                        <span className={`text-white font-semibold`}>
+                          {card.votes.length}/{card.votesNeeded}
+                        </span>
+                      </TextCard>
+                    </div>
                   </div>
-
-                  <span className={`absolute -bottom-6 left-[40%] font-bold`}>
-                    {card.status.replace("_", " ")}
-                  </span>
+                  <div
+                    className={`flex text-center w-full font-medium h-8 items-center justify-center text-xl`}
+                    style={{ backgroundColor: cardColor }}
+                  >
+                    <span>{card.status.replace("_", " ")}</span>
+                  </div>
                 </div>
               </>
             );
