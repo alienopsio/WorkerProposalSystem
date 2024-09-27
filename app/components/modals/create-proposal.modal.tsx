@@ -24,6 +24,7 @@ interface CreateProposalModalProps extends ModalProps {
 }
 
 enum ExecutionTime {
+  OneDay = "1 day",
   OneWeek = "1 week",
   TwoWeeks = "2 weeks",
   ThreeWeeks = "3 weeks",
@@ -52,6 +53,7 @@ interface ICreateProposalInput {
 }
 
 enum executionTimeToDuration {
+  "1 day" = 1 * 24 * 60 * 60,
   "1 week" = 7 * 24 * 60 * 60,
   "2 weeks" = 14 * 24 * 60 * 60,
   "3 weeks" = 21 * 24 * 60 * 60,
