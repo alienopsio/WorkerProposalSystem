@@ -7,8 +7,9 @@ import { FeedbackModalProvider } from "./context/FeedbackModalContext";
 import { ArbitersProvider } from "./context/ArbitersContext";
 import { VotesProvider } from "./context/VotesContext";
 import { BalancesProvider } from "./context/BalanceContext";
+import { ConfigsProvider } from "./context/ConfigContext";
 
-const providers = [AuthProvider, PlanetProvider, FeedbackModalProvider, ArbitersProvider, VotesProvider, BalancesProvider];
+const providers = [AuthProvider, PlanetProvider, FeedbackModalProvider, ArbitersProvider, VotesProvider, BalancesProvider, ConfigsProvider];
 const queryClient = new QueryClient();
 
 export function Provider({ children }: { children: React.ReactNode }) {

@@ -1,5 +1,5 @@
 import { APIClient } from "@wharfkit/session";
 
 export const contractApiClient = new APIClient({
-  url: "https://wax.greymass.com",
+  url: process.env.NEXT_PUBLIC_RPC_ENDPOINT,
 });

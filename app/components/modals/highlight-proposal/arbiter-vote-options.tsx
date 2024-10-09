@@ -3,6 +3,7 @@ import { Button } from "../../generic/buttons/button";
 import { useFeedbackModal } from "@/app/hook/useFeedbackModal";
 import { AnyAction } from "@wharfkit/session";
 import { usePlanet } from "@/app/hook/usePlanet";
+import { propWorldsContract } from "@/app/common/constants/token.constant";
 
 export const ArbiterVoteOptions = ({
   proposalId,
@@ -26,7 +27,7 @@ export const ArbiterVoteOptions = ({
       }
 
       const voteProposalAction: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: vote,
         authorization: [
           {

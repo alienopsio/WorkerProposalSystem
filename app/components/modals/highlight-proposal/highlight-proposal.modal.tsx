@@ -19,6 +19,7 @@ import { ArbiterVoteOptions } from "./arbiter-vote-options";
 import { useCustodians } from "@/app/hook/useCustodians";
 import { useVotes } from "@/app/hook/useVotes";
 import { getShowName } from "@/app/common/utils/get-card-show-name.util";
+import { propWorldsContract } from "@/app/common/constants/token.constant";
 
 interface HighlightProposalModalProps extends ModalProps {
   // Define props here
@@ -92,7 +93,7 @@ export const HighlightProposalModal = ({
       }
 
       const voteProposalAction: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: voteAction,
         authorization: [
           {
@@ -139,7 +140,7 @@ export const HighlightProposalModal = ({
       }
 
       const voteProposalAction: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: "startwork",
         authorization: [
           {
@@ -180,7 +181,7 @@ export const HighlightProposalModal = ({
       }
 
       const voteProposalAction: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: "completework",
         authorization: [
           {
@@ -221,7 +222,7 @@ export const HighlightProposalModal = ({
       }
 
       const voteProposalAction: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: "finalize",
         authorization: [
           {
@@ -276,7 +277,7 @@ export const HighlightProposalModal = ({
         },
       };
       const disputeActionPropWorlds: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: "dispute",
         authorization: [
           {
@@ -339,7 +340,7 @@ export const HighlightProposalModal = ({
         },
       };
       const arbiterActionPropWorlds: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: secondAction,
         authorization: [
           {

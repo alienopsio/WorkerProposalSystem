@@ -41,7 +41,6 @@ export const ProposalCards = ({
             return (
               <>
                 <div
-                  key={card.id}
                   className={`flex cursor-pointer bg-black/40 flex-col min-h-[400px] transition-opacity`}
                   onClick={() => {
                     setIsOpen(true);

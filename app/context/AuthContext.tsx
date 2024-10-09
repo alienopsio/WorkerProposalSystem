@@ -8,6 +8,7 @@ interface AuthContextData {
   signIn(): Promise<void>
   signOut(): Promise<void>
   activeUserData: Session | null
+  isFirstTime: boolean
 }
 
 type AuthProviderProps = {

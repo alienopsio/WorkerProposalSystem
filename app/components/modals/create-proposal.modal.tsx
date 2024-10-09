@@ -14,6 +14,7 @@ import { useArbiters } from "@/app/hook/useArbiters";
 import {
   mainTokenContract,
   mainTokenSymbol,
+  propWorldsContract,
   testTokenContract,
   testTokenSymbol,
 } from "@/app/common/constants/token.constant";
@@ -98,7 +99,7 @@ export const CreateProposalModal = ({
       }
 
       const createProposalActionData: AnyAction = {
-        account: "prop.worlds",
+        account: propWorldsContract,
         name: "createprop",
         authorization: [{ actor: activeUserData.actor, permission: "active" }],
         data: {

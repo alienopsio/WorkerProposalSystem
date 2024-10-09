@@ -26,7 +26,7 @@ export default function WorkerProposalsLayout() {
     proposalsTable?.rows ?? []
   );
   return (
-    <div className=" relative flex flex-col px-8 gap-5 w-full ">
+    <div className=" relative flex flex-col px-8 gap-5 w-full " id="layout_root">
       <StatusBarPlanet />
       <FilterProposalBar handleSelectFilter={handleSelectFilter} />
       <ProposalCards
