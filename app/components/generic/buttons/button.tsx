@@ -18,12 +18,13 @@ export const Button = ({ onClick, children, state, size }: ButtonProps) => {
   const isMuted = state === "muted";
   const isCompleted = state === "completed";
   const isExpired = state === "expired";
+  const isDark = state === "dark";
 
   return (
     <button
       onClick={onClick}
       className={`border-[1.75px] w-full rounded uppercase text-xs font-bold mt-1 border-solid align-middle border-black px-5 py-2 ${
-        isActive && "bg-[#00FFFF] text-black"
+        isActive && "bg-[#00FFFF] text-black hover:bg-transparent hover:text-[#00FFFF] hover:border-[#00FFFF] transition-all"
       } ${
         isLight &&
         "bg-white text-black hover:bg-transparent hover:text-white hover:border-white transition-all hover:border-[1.75px]"
@@ -52,6 +53,10 @@ export const Button = ({ onClick, children, state, size }: ButtonProps) => {
       ${
         isExpired &&
         "bg-gray-600 text-white hover:bg-transparent hover:text-gray-500 hover:border-gray-700 transition-all"
+      }
+      ${
+        isDark &&
+        "bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all border-[1px] border-solid border-white hover:border-black"
       }
       `}
     >

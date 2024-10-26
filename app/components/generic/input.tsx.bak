@@ -11,13 +11,11 @@ interface InputProps
 }
 
 // The following component is an example of your existing Input Component
-export const Input = ({ label, register, required, name, type, onChange }: InputProps) => (
+export const Input = ({ label, register, required, name }: InputProps) => (
   <>
     <label>{label}</label>
     <input
       {...register(name, { required})}
-      type={type}
-      onChange={onChange}
       className="bg-black border-white border-solid border-[1px]"
     />
   </>

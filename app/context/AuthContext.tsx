@@ -8,6 +8,7 @@ interface AuthContextData {
   signIn(): Promise<void>
   signOut(): Promise<void>
   activeUserData: Session | null
+  isFirstTime: boolean
 }
 
 type AuthProviderProps = {
@@ -19,41 +20,63 @@ export const AuthContext = createContext({} as AuthContextData)
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [activeUserData, setActiveUserData] = useState<Session | null>(null)
   const [sessionKit, setSessionKit] = useState<SessionKit | null>(null)
+  const [isFirstTime, setIsFirstTime] = useState(true)
 
+  // Init function or SessionKit
   useEffect(() => {
-    // This code will be executed only once when the component is mounted
-    async function initSesion() {
+    async function initSession() {
       const newSessionKit = await createSessionKit()
       setSessionKit(newSessionKit)
     }
-    initSesion()
-    // So when the component is unmounted, the cleanup function will be executed
+
+    //Function to verify if it is the first time the user is accessing the site
+    function checkFirstTime() {
+      const visited = localStorage.getItem('visited')
+      if (visited) {
+        setIsFirstTime(false) // Not first time
+      } else {
+        setIsFirstTime(true) // Is first time
+      }
+    }
+
+    checkFirstTime()
+    initSession()
   }, [])
 
+  // Restore session
   useEffect(() => {
-    //Will run when sessionkit is changed.
     if (sessionKit) {
-      sessionKit.restore().then(restoredSession => {
+      sessionKit.restore().then((restoredSession) => {
         if (!restoredSession) return
         setActiveUserData(restoredSession)
       })
     }
   }, [sessionKit])
 
+  // login function
   const signIn = async () => {
-    if (!sessionKit) return // If sessionKit is not initialized, return
+    if (!sessionKit) return
     const { session } = await sessionKit.login()
+
+    // It checks if it is the first time the user is accessing the site if not create the localStorage item
+    if (isFirstTime) {
+      localStorage.setItem('visited', 'true') // Set the item to true
+    }
+
     setActiveUserData(session)
   }
 
+  // Logout function
   const signOut = async () => {
-    if (!sessionKit) return // If sessionKit is not initialized, return
+    if (!sessionKit) return
     await sessionKit.logout()
     setActiveUserData(null)
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, activeUserData }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, activeUserData, isFirstTime }}
+    >
       {children}
     </AuthContext.Provider>
   )

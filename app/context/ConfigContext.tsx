@@ -34,7 +34,8 @@ export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
     refetchIntervalInBackground: true,
   });
 
-  const configs =  (configsTable?.rows.map((config) => config) as Config[]) ?? [];
+  const configs =
+    (configsTable?.rows.map((config) => config) as Config[]) ?? [];
 
   return (
     <ConfigsContext.Provider value={{ configs }}>

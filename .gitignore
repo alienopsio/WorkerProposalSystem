@@ -152,3 +152,7 @@ public/assets/
 /src-tauri/target/
 
 package-lock.json
+
+#Temporal
+.bak
+.tsx.bak

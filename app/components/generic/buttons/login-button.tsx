@@ -11,7 +11,7 @@ export const LoginButton = () => {
   return (
     <button
       onClick={handleSignIn}
-      className={`border-2 border-white bg-white text-black uppercase px-14 py-3 font-semibold cursor-pointer`}
+      className={`border-2 border-white bg-white text-black uppercase px-14 py-3 font-semibold cursor-pointer w-full`}
     >
       sign in
     </button>

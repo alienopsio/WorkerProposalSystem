@@ -3,10 +3,11 @@ import { useAuth } from "../../hook/useAuth";
 import { Button } from "../generic/buttons/button";
 import { useState } from "react";
 import { VisitorInfo } from "./visitor-info";
-import { CreateProposalModal } from "../modals/create-proposal.modal";
+import { CreateProposalModal } from "../modals/create-proposal/create-proposal.modal";
+import { OnboardingModal } from "../modals/onboarding/onboarding.modal";
 
 export default function Navbar() {
-  const { activeUserData } = useAuth();
+  const { activeUserData, isFirstTime } = useAuth();
   const [open, setOpen] = useState(false);
 
   const toggleModal = () => {
@@ -14,6 +15,7 @@ export default function Navbar() {
   };
 
   const isVisitor = !activeUserData?.actor;
+  const showOnboardingModal = isFirstTime && !isVisitor;
 
   return (
     <>
@@ -21,8 +23,13 @@ export default function Navbar() {
         <VisitorInfo />
         <div className="flex flex-row-reverse gap-2 min-w-[360px]">
           <LogInLink />
-          {!isVisitor && <Button state="dark" onClick={toggleModal}>Create Proposal</Button>}
+          {!isVisitor && (
+            <Button state="dark" onClick={toggleModal}>
+              Create Proposal
+            </Button>
+          )}
           <CreateProposalModal open={open} onClose={toggleModal} />
+          {showOnboardingModal && <OnboardingModal />}
         </div>
       </div>
     </>

@@ -9,7 +9,7 @@ export default function StatusBarPlanet() {
   const planetImage = planet?.image || "kavian.png";
 
   return (
-    <div className="flex items-center w-full text-white mt-2">
+    <div className="flex items-center w-full text-white mt-2 justify-between">
       <div className="flex w-[70%] gap-5 items-center">
         <h2 className="font-extralight text-2xl">WORKER PROPOSALS</h2>
         <span className="text-3xl font-normal">|</span>
@@ -26,7 +26,7 @@ export default function StatusBarPlanet() {
           {!planet ? "eyeke" : planet.name}
         </div>
       </div>
-      <div className="flex w-[30%]">
+      <div className="flex w-[20%]">
         <SelectPlanets />
       </div>
     </div>

@@ -4,36 +4,36 @@ import { useEffect, useState } from "react";
 import { usePlanet } from "./usePlanet";
 import { useAuth } from "./useAuth";
 
-export const useCustodians = () => {
-  const [isCustodian, setIsCustodian] = useState<boolean>(false);
+export const useCustomers = () => {
+  const [isCustomer, setIsCustomer] = useState<boolean>(false);
 
   const { activeUserData } = useAuth();
   const { planet } = usePlanet();
 
   useEffect(() => {
-    async function checkIfCustodian() {
+    async function checkIfCustomer() {
       if (activeUserData && planet) {
         const playerAccount = activeUserData.actor.toString();
-        const custodians = (
+        const customers = (
           await activeUserData.client.v1.chain.get_table_rows({
-            code: "dao.worlds",
+            code: "prop.worlds",
+            table: "recwl",
             scope: planet.key,
-            table: "custodians1",
             limit: 1000,
           })
-        ).rows.map((row) => row.cust_name);
+        ).rows.map((row) => row.receiver);
 
-        if (custodians.length === 0) {
-          setIsCustodian(false);
+        if (customers.length === 0) {
+          setIsCustomer(false);
           return;
         }
 
-        const isCustodianAccount = custodians.includes(playerAccount);
-        setIsCustodian(isCustodianAccount);
+        const isCustomerAccount = customers.includes(playerAccount);
+        setIsCustomer(isCustomerAccount);
       }
     }
-    checkIfCustodian();
+    checkIfCustomer();
   }, [activeUserData, planet]);
 
-  return { isCustodian };
+  return { isCustomer };
 };
