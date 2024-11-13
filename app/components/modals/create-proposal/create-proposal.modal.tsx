@@ -123,7 +123,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
           content_hash: data.url,
           id: generateRandomId(),
           category: 0,
-          job_duration: executionTimeToDuration[data.executionTime],
+          job_duration: executionTimeToDuration[+data.executionTime],
           dac_id: planetName,
         },
       };
