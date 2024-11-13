@@ -1,4 +1,4 @@
-import Modal, { ModalProps } from "react-responsive-modal";
+import Modal from "react-responsive-modal";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { usePlanet } from "@/app/hook/usePlanet";
 import { useAuth } from "@/app/hook/useAuth";
@@ -17,11 +17,7 @@ import { useBalance } from "@/app/hook/useBalance";
 import { Input } from "../../generic/input";
 import { Button } from "../../generic/buttons/button";
 import { useCustomers } from "@/app/hook/useKYC";
-import axios from "axios";
-
-interface CreateProposalModalProps extends ModalProps {
-  // Define props here
-}
+import FileUpload from "./file-upload";
 
 enum ExecutionTime {
   OneWeek = "1 week",
@@ -38,6 +34,7 @@ type Field =
   | "arbiterWallet"
   | "arbiterReward"
   | "description"
+  | "content_hash"
   | "chargeAdviceRequired";
 
 interface ICreateProposalInput {
@@ -48,6 +45,7 @@ interface ICreateProposalInput {
   arbiterWallet: string;
   arbiterReward: number;
   description: string;
+  content_hash: string;
   chargeAdviceRequired: boolean;
 }
 
@@ -58,10 +56,7 @@ enum executionTimeToDuration {
   "1 month" = 30 * 24 * 60 * 60,
 }
 
-export const CreateProposalModal = ({
-  onClose,
-  open: openModal,
-}: CreateProposalModalProps) => {
+export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
   const { handleShowFeedbackModal } = useFeedbackModal();
   const {
     register,
@@ -69,6 +64,7 @@ export const CreateProposalModal = ({
     formState: { errors },
     reset,
     setValue,
+    getValues,
   } = useForm<ICreateProposalInput>();
 
   const { activeUserData } = useAuth();
@@ -78,7 +74,15 @@ export const CreateProposalModal = ({
   const { arbiters } = useArbiters();
   const { testaBalance, tlmBalance } = useBalance();
 
-  const onSubmit: SubmitHandler<ICreateProposalInput> = async (data) => {
+  const onSubmit: SubmitHandler<ICreateProposalInput> = async (data: {
+    title: any;
+    amount: any;
+    executionTime: string | number;
+    url: any;
+    arbiterWallet: any;
+    arbiterReward: any;
+    description: any;
+  }) => {
     try {
       console.log(data);
       if (!activeUserData?.actor) {
@@ -275,25 +279,13 @@ export const CreateProposalModal = ({
             </label>
 
             <Input
-              label="File:"
+              label="IPFS:"
+              name="url"
               register={register}
-              type="file"
-              name="file"
-              id="file"
-              onChange={async (event) => {
-                const file = event.target.files?.[0];
-                if (!file) return;
-                const {data: ipfsResultData} = await axios.post(
-                  "https://api.alienworlds.io/workerproposal/upload",
-                  {
-                    file: file,
-                  }
-                );
-                const url = ipfsResultData.result.cid;
-                setValue("url", url);
-              }}
-              required
-            ></Input>
+              required={true}
+              placeholder="Upload your IPFS before"
+            />
+            <FileUpload setValue={setValue} />
 
             <label className="flex flex-col gap-1">
               Arbiter Wallet:

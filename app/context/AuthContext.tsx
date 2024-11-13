@@ -31,7 +31,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     //Function to verify if it is the first time the user is accessing the site
     function checkFirstTime() {
+      
       const visited = localStorage.getItem('visited')
+      console.log("checkFirstTime before visited", visited)
       if (visited) {
         setIsFirstTime(false) // Not first time
       } else {
@@ -59,6 +61,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const { session } = await sessionKit.login()
 
     // It checks if it is the first time the user is accessing the site if not create the localStorage item
+    console.log("signIn before isFirstTime", isFirstTime)
     if (isFirstTime) {
       localStorage.setItem('visited', 'true') // Set the item to true
     }
