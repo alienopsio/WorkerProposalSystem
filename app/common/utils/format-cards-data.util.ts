@@ -70,6 +70,7 @@ export function formatCardsData(
       votesDeny: [],
       arbiter_agreed: Boolean(card.arbiter_agreed),
       status,
+      contentHash: card.content_hash,
     };
   });
 }

@@ -25,6 +25,7 @@ export interface CardData {
   votesDeny: Vote[];
   votesNeeded: number;
   arbiter_agreed: boolean;
+  contentHash: string;
   status: (typeof CardStatus)[keyof typeof CardStatus] | string;
 }
 
@@ -111,6 +112,7 @@ class GenerateFakeCardData {
       status:
         Object.values(CardStatus).slice(1)?.[randomStatus] ??
         CardStatus.all_proposals,
+      contentHash: "Qm" + this.random.number(100000000, 999999999),
     };
   }
 }

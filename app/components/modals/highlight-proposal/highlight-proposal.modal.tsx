@@ -494,6 +494,17 @@ export const HighlightProposalModal = ({
                 <h3 className="text-xl font-bold text-white">Description</h3>
                 <p className="text-white mt-2">{proposalData.description}</p>
               </div>
+              {proposalData.contentHash.startsWith("Q") && (
+                <div className="mt-6">
+                  <a
+                    className="text-xl font-bold  animate-pulse text-[#00FFFF]"
+                    href={`https://ipfs.alienworlds.io/ipfs/${proposalData.contentHash}`}
+                    target="_blank"
+                  >
+                    Documentation
+                  </a>
+                </div>
+              )}
               {!canStartWork && (
                 <>
                   {canVote &&

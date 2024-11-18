@@ -34,7 +34,6 @@ type Field =
   | "arbiterWallet"
   | "arbiterReward"
   | "description"
-  | "content_hash"
   | "chargeAdviceRequired";
 
 interface ICreateProposalInput {
@@ -45,7 +44,6 @@ interface ICreateProposalInput {
   arbiterWallet: string;
   arbiterReward: number;
   description: string;
-  content_hash: string;
   chargeAdviceRequired: boolean;
 }
 
