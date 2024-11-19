@@ -1,4 +1,4 @@
-import Modal from "react-responsive-modal";
+import Modal, {ModalProps} from "react-responsive-modal";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { usePlanet } from "@/app/hook/usePlanet";
 import { useAuth } from "@/app/hook/useAuth";
@@ -19,8 +19,12 @@ import { Button } from "../../generic/buttons/button";
 import { useCustomers } from "@/app/hook/useKYC";
 import FileUpload from "./file-upload";
 
+interface CreateProposalModalProps extends ModalProps {
+  // Define props here
+}
+
 enum ExecutionTime {
-  OneWeek = "1 week.",
+  OneWeek = "1 week",
   TwoWeeks = "2 weeks",
   ThreeWeeks = "3 weeks",
   OneMonth = "1 month",
@@ -54,7 +58,7 @@ enum executionTimeToDuration {
   "1 month" = 30 * 24 * 60 * 60,
 }
 
-export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
+export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposalModalProps) => {
   const { handleShowFeedbackModal } = useFeedbackModal();
   const {
     register,
@@ -121,7 +125,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
           content_hash: data.url,
           id: generateRandomId(),
           category: 0,
-          job_duration: executionTimeToDuration[+data.executionTime],
+          job_duration: executionTimeToDuration[data.executionTime],
           dac_id: planetName,
         },
       };
