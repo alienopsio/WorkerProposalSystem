@@ -106,7 +106,6 @@ export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
           proposer: activeUserData.actor.toString(),
           title: data.title,
           amount: data.amount,
-          execution_time: data.executionTime,
           url: data.url,
           arbiter: data.arbiterWallet,
           arbiter_pay: {
@@ -121,7 +120,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
           content_hash: data.url,
           id: generateRandomId(),
           category: 0,
-          job_duration: String(executionTimeToDuration[+data.executionTime]),
+          job_duration: executionTimeToDuration[+data.executionTime],
           dac_id: planetName,
         },
       };
