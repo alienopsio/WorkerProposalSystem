@@ -76,15 +76,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
   const { arbiters } = useArbiters();
   const { testaBalance, tlmBalance } = useBalance();
 
-  const onSubmit: SubmitHandler<ICreateProposalInput> = async (data: {
-    title: any;
-    amount: any;
-    executionTime: string | number;
-    url: any;
-    arbiterWallet: any;
-    arbiterReward: any;
-    description: any;
-  }) => {
+  const onSubmit: SubmitHandler<ICreateProposalInput> = async (data) => {
     try {
       console.log(data);
       if (!activeUserData?.actor) {
@@ -125,7 +117,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
           content_hash: data.url,
           id: generateRandomId(),
           category: 0,
-          job_duration: executionTimeToDuration[data.executionTime],
+          job_duration: executionTimeToDuration[data.executionTime as ExecutionTime],
           dac_id: planetName,
         },
       };
