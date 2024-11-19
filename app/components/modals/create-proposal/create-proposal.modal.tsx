@@ -51,7 +51,7 @@ enum executionTimeToDuration {
   "1 week" = 7 * 24 * 60 * 60,
   "2 weeks" = 14 * 24 * 60 * 60,
   "3 weeks" = 21 * 24 * 60 * 60,
-  "1 month" = 30 * 24 * 60 * 60,
+  "1 month" = 30 * 24 * 60 * 60
 }
 
 export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
@@ -121,7 +121,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: any) => {
           content_hash: data.url,
           id: generateRandomId(),
           category: 0,
-          job_duration: executionTimeToDuration[data.executionTime],
+          job_duration: String(executionTimeToDuration[+data.executionTime]),
           dac_id: planetName,
         },
       };
