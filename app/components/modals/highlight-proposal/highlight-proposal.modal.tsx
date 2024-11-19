@@ -501,7 +501,7 @@ export const HighlightProposalModal = ({
                     href={`https://ipfs.alienworlds.io/ipfs/${proposalData.contentHash}`}
                     target="_blank"
                   >
-                    Documentation
+                    View Documentation
                   </a>
                 </div>
               )}

@@ -8,7 +8,7 @@ import Head from 'next/head';
 const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Worker Proposal System - WPS 1.0.8",
+  title: "Worker Proposal System - WPS 1.0.9",
   description: "",
 };
 
