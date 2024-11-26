@@ -47,11 +47,11 @@ export const OnboardingModal = () => {
         <div className="flex flex-col w-full max-w-[430px] gap-1">
           <Button
             state="light"
-            onClick={() => open("https://alienworlds.io/workerproposals")}
+            onClick={() => open("https://alienworlds.io/blogs/worker-proposal-best-practices/")}
           >
             AWESOME, I WANT TO CREATE THE BEST PROPOSAL
           </Button>
-          <Button state="dark" onClick={() => open("https://wps.alienops.io/documentation")}>TAKE ME TO THE DOCUMENTATION INSTEAD</Button>
+          <Button state="dark" onClick={() => open("https://alienops.io/wps/documentation/")}>TAKE ME TO THE DOCUMENTATION INSTEAD</Button>
         </div>
 
         <div>
