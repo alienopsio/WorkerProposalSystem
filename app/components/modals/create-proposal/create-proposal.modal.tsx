@@ -350,15 +350,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
               Human Beings. Please follow the process and best
               <br />
               pratices when creating a Worker Proposal: <br />
-              <div className="flex flex-col max-w-[300px] items-center justify-center text-center w-full justify-self-center">
-                <b
-                  className="text-[#00FFFF] cursor-pointer"
-                  onClick={() => open("https://alienworlds.io/kyc-compliant")}
-                >
-                  alienworlds.io/kyc-compliant
-                </b>
-                <hr className="w-full border-[#00FFFF]" />
-              </div>
+
             </div>
             <Button
               state="active"
