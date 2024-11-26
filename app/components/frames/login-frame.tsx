@@ -14,7 +14,7 @@ export const LoginFrame = () => {
         >
           <article className={`flex flex-col gap-6 justify-center items-center`}>
             <div className="flex flex-col text-[#00FFFF] justify-center items-center max-w-[250px]">
-              <span className="cursor-pointer font-bold text-sm" onClick={() => open("https://wp.alienops.io/documentation")}>
+              <span className="cursor-pointer font-bold text-sm" onClick={() => open("https://alienops.io/wps/documentation/")}>
                 READ THE DOCUMENTATION
               </span>
               <hr className="w-full border-[#00FFFF]" />
