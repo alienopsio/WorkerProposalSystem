@@ -11,10 +11,7 @@ export const metadata: Metadata = {
   description: "",
   // Add meta tags directly in the Metadata API
   other: [
-    {
-      name: "color-scheme",
-      content: "only light",
-    },
+    ["color-scheme", "only light"]
   ]
 };
 
