@@ -444,7 +444,7 @@ export const HighlightProposalModal = ({
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Votes: {proposalData.votes.length}/
+                      Votes: {proposalData.votesFinal.length}/
                       {proposalData.votesNeeded}{" "}
                       <b>({reachedVotes ? "Reached ✅" : "Not Reached ⏳"})</b>
                     </span>
@@ -452,7 +452,7 @@ export const HighlightProposalModal = ({
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Deny Votes: {proposalData.votesDeny.length}/
+                      Deny Votes: {finalizingDenyVotesForProposal.length}/
                       {proposalData.votesNeeded}{" "}
                       <b>{reachedDenyVotesForFinalizing && "Denied 🟥"}</b>
                     </span>
