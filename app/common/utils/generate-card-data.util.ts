@@ -12,6 +12,7 @@ export const CardStatus = {
   rejected: "rejected",
   expired: "expired",
 } as const;
+
 export interface CardData {
   id: string;
   title: string;
@@ -26,6 +27,7 @@ export interface CardData {
   votesNeeded: number;
   arbiter_agreed: boolean;
   contentHash: string;
+  cardstate: string;
   status: (typeof CardStatus)[keyof typeof CardStatus] | string;
 }
 
