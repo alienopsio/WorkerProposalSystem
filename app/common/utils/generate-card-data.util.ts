@@ -111,6 +111,7 @@ class GenerateFakeCardData {
       votesDeny: [],
       votesNeeded: this.random.number(100, 200),
       arbiter_agreed: Math.random() > 0.5,
+      cardstate: "aeiou",
       status:
         Object.values(CardStatus).slice(1)?.[randomStatus] ??
         CardStatus.all_proposals,
