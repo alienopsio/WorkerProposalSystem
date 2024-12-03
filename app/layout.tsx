@@ -3,16 +3,13 @@ import { Darker_Grotesque } from "next/font/google";
 import "./globals.css";
 import "react-responsive-modal/styles.css";
 import { Provider } from "./providers";
+import Head from 'next/head';
 
 const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Worker Proposal System - WPS 1.0.10",
+  title: "Worker Proposal System - WPS 1.0.11",
   description: "",
-  // Add meta tags directly in the Metadata API
-  other: [
-    ["color-scheme", "only light"]
-  ]
 };
 
 export default function RootLayout({
@@ -22,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">  
+      <Head>
+        <meta name="color-scheme" content="only light" />
+      </Head> 
       <body className={darkerGrotesque.className}>
         <Provider>{children}</Provider>
       </body>
