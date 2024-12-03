@@ -36,6 +36,10 @@ export function formatCardsData(
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_HAS_ENOUGH_FIN_VOTES:
+        status = "finalizing";
+        break;
+      
+      case PROPOSAL_STATE_ENUM.STATE_IS_COMPLETED:
         status = "completed";
         break;
 
@@ -70,6 +74,7 @@ export function formatCardsData(
       votesDeny: [],
       arbiter_agreed: Boolean(card.arbiter_agreed),
       status,
+      cardstate: card.state,
       contentHash: card.content_hash,
     };
   });

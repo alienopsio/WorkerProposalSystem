@@ -43,7 +43,7 @@ export const HighlightProposalModal = ({
 
   const isArbiter = proposalData?.arbiter === activeUserData?.actor.toString();
 
-  const isFinalizing = proposalData?.status === "finalizing";
+  const isFinalizing = proposalData?.status === "finalizing"
   const isVoting = proposalData?.status === "voting";
   const canVote = (isVoting || isFinalizing) && isCustodian;
 
@@ -70,8 +70,9 @@ export const HighlightProposalModal = ({
   const reachedDenyVotesForFinalizing =
     finalizingDenyVotesForProposal.length >= proposalData?.votesNeeded;
 
-  const isCompleted = proposalData?.status === "completed";
-  const canFinalizeInCompleted = isCompleted && isProposalOwner;
+  const isCompleted = proposalData?.status === "finalizing";
+  const isCompletedFinal = proposalData?.cardstate === "apprfinvtes";
+  const canFinalizeInCompleted = isCompletedFinal && isProposalOwner;
 
   const canDispute =
     isProposalOwner && isFinalizing && reachedDenyVotesForFinalizing;
@@ -504,10 +505,10 @@ export const HighlightProposalModal = ({
                     View Documentation
                   </a>
                 </div>
-              )}
-              {!canStartWork && (
+              )}              
+              {!canStartWork &&  (
                 <>
-                  {canVote &&
+                  {canVote && !isCompletedFinal &&
                     (!reachedVotes ||
                       (isFinalizing && !reachedVotesForFinalizing)) && (
                       <CustodiansVoteOptions
@@ -543,7 +544,7 @@ export const HighlightProposalModal = ({
                   </Button>
                 </div>
               )}
-              {canFinalizeInCompleted && (
+              {isCompletedFinal && (
                 <div className="flex justify-center mt-6">
                   <Button
                     state="completed"

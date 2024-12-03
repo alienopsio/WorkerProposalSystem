@@ -4,6 +4,7 @@ enum PROPOSAL_STATE_ENUM {
   STATE_IN_PROGRESS = "inprogress",
   STATE_PENDING_FINALIZE = "pendingfin",
   STATE_HAS_ENOUGH_FIN_VOTES = "apprfinvtes",
+  STATE_IS_COMPLETED = "completed",
   STATE_EXPIRED = "expired",
   STATE_DISPUTED = "indispute",
 }
