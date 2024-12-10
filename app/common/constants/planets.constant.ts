@@ -40,14 +40,14 @@ const planets = [
     image: "veles.png",
     address: "veles.dac",
     minVote: 3,
-  },
+  },/*
   {
     name: "testa",
     key: "testa",
     image: "testa.png",
     address: "testadacdacc",
     minVote: 2,
-  },
+  },*/
 ];
 
 export type Planet = (typeof planets)[number];

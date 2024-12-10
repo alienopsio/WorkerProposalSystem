@@ -71,8 +71,9 @@ export const HighlightProposalModal = ({
     finalizingDenyVotesForProposal.length >= proposalData?.votesNeeded;
 
   const isCompleted = proposalData?.status === "finalizing";
-  const isCompletedFinal = proposalData?.cardstate === "apprfinvtes";
-  const canFinalizeInCompleted = isCompletedFinal && isProposalOwner;
+  const isCompletedFinalizing = proposalData?.cardstate === "apprfinvtes";
+  const isCompletedFinal = proposalData?.status === "completed";
+  const canFinalizeInCompleted = isCompletedFinalizing && isProposalOwner;
 
   const canDispute =
     isProposalOwner && isFinalizing && reachedDenyVotesForFinalizing;
@@ -439,47 +440,43 @@ export const HighlightProposalModal = ({
                   Cost: {proposalData.cost}
                 </span>
               </div>
-              {!isFinalizing && (
+              <div>
+                Status : {proposalData?.status} 
+              </div>
+              <div>
+                isFinalizing : {isFinalizing}
+              </div>
+              {!isFinalizing && !isCompletedFinal && (
                 <>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Votes: {proposalData.votesFinal.length}/
-                      {proposalData.votesNeeded}{" "}
+                      1Votes: {proposalData.votes.length}/{proposalData.votesNeeded}{" "}
                       <b>({reachedVotes ? "Reached ✅" : "Not Reached ⏳"})</b>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Deny Votes: {finalizingDenyVotesForProposal.length}/
-                      {proposalData.votesNeeded}{" "}
+                      1Deny Votes: {proposalData.votesDeny.length}/{proposalData.votesNeeded}{" "}
                       <b>{reachedDenyVotesForFinalizing && "Denied 🟥"}</b>
                     </span>
                   </div>
                 </>
               )}
-              {isFinalizing && (
+              {isFinalizing || isCompletedFinal && (
                 <>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Votes: {proposalData?.votesFinal.length ?? 0}/
-                      {proposalData.votesNeeded}{" "}
-                      <b>
-                        (
-                        {reachedVotesForFinalizing
-                          ? "Reached Final Votes✅"
-                          : "Not Reached Final Votes⏳"}
-                        )
-                      </b>
+                      2Votes: {proposalData?.votesFinal.length ?? 0}/{proposalData.votesNeeded}{" "}
+                      <b>({reachedVotesForFinalizing ? "Reached Final Votes✅": "Not Reached Final Votes⏳"})</b>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      Votes Deny: {finalizingDenyVotesForProposal.length ?? 0}/
-                      {proposalData.votesNeeded}{" "}
+                      2Votes Deny: {finalizingDenyVotesForProposal.length ?? 0}/{proposalData.votesNeeded}{" "}
                       <b>({reachedDenyVotesForFinalizing && "Denied 🟥"})</b>
                     </span>
                   </div>
@@ -508,7 +505,7 @@ export const HighlightProposalModal = ({
               )}              
               {!canStartWork &&  (
                 <>
-                  {canVote && !isCompletedFinal &&
+                  {canVote && !isCompletedFinalizing &&
                     (!reachedVotes ||
                       (isFinalizing && !reachedVotesForFinalizing)) && (
                       <CustodiansVoteOptions
@@ -544,7 +541,7 @@ export const HighlightProposalModal = ({
                   </Button>
                 </div>
               )}
-              {isCompletedFinal && (
+              {isCompletedFinalizing && (
                 <div className="flex justify-center mt-6">
                   <Button
                     state="completed"
