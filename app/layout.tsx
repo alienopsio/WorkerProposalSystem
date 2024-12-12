@@ -9,7 +9,7 @@ import GoogleAnalytics from './GoogleAnalytics';
 const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Worker Proposal System - WPS 1.0.13",
+  title: "Worker Proposal System - WPS 1.0.14",
   description: "",
 };
 

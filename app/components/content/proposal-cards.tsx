@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import {
   ByIcon,
   DurationIcon,
@@ -15,6 +15,7 @@ import { TuseFiltersCards } from "../../hook/useFiltersCards";
 import moment from "moment";
 import { HighlightProposalModal } from "../modals/highlight-proposal/highlight-proposal.modal";
 import { getCardColor } from "@/app/common/utils/get-card-color.util";
+import { setUserProperties, trackEvent } from "@/app/GAnalytics";
 
 type TcardsToShow = TuseFiltersCards["cardsToShow"];
 
@@ -27,6 +28,13 @@ export const ProposalCards = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardData>(cardsToShow[0]);
+
+  useEffect(() => {
+    if (isOpen && selectedCard) {
+      trackEvent("click_card", "proposal_id", selectedCard.id);
+      trackEvent("click_card", "proposal", selectedCard.title);
+    }
+  }, [isOpen, selectedCard]);
 
   return (
     <section
