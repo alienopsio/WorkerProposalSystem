@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { SelectPlanets } from "../content/select-planets";
 import { LoginButton } from "../generic/buttons/login-button";
+import { setUserProperties, trackEvent } from "../../GAnalytics";
 
 export const LoginFrame = () => {
+  const handleVisitorClick = () => {    
+    setUserProperties({
+      set_user_role: 'visitor'
+    });
+    trackEvent('click_link', 'login', 'continue as visitor');
+  };
   return (
     <main className={`flex flex-col items-center py-14 gap-5`}>
       <center>
@@ -35,6 +42,7 @@ export const LoginFrame = () => {
           <Link
             href={"?visitor=true"}
             className={`uppercase text-sm font-semibold hover:scale-110 hover:text-[#00FFFF] transition-all cursor-pointer duration-500`}
+            onClick={handleVisitorClick}
           >
             continue as visitor
           </Link>
