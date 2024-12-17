@@ -93,6 +93,17 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
       if (balance.amount < 120) {
         throw new Error("Insufficient balance to create proposal");
       }
+      const createProposalActionDataTransfer: AnyAction ={
+        account: tokenContract,
+        name: "transfer",
+        authorization: [{ actor: activeUserData.actor, permission: "active" }],
+        data: {
+          from:activeUserData.actor,
+          to:tokenContract,
+          quantity: `120.0000 ${tokenSymbol}`,
+          memo: ""
+        }
+      }
 
       const createProposalActionData: AnyAction = {
         account: propWorldsContract,
@@ -121,14 +132,24 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
           dac_id: planetName,
         },
       };
-
-      const result = await activeUserData.transact({
-        actions: [createProposalActionData],
-      });
-
-      if (!result) {
-        throw new Error("Transaction failed");
+      if (process.env.NEXT_PUBLIC_TRANSFER === 'True') {
+        const result = await activeUserData.transact({
+          actions: [createProposalActionDataTransfer,createProposalActionData],
+        });
+        
+        if (!result) {
+          throw new Error("Transaction failed");
+        }
+      }else{
+        const result = await activeUserData.transact({
+          actions: [createProposalActionData],
+        });
+        
+        if (!result) {
+          throw new Error("Transaction failed");
+        }
       }
+
 
       handleShowFeedbackModal(true, {
         message:
