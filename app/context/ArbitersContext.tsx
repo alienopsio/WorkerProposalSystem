@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ReactNode, createContext } from "react";
-import { usePlanet } from "../hook/usePlanet";
+import { usePlanetKey } from "../hook/usePlanet";
 import { getArbiters } from "../services/arbiters.service";
 
 interface Arbiter {
@@ -21,7 +21,7 @@ type ArbitersProviderProps = {
 };
 
 export const ArbitersProvider = ({ children }: ArbitersProviderProps) => {
-  const { planetName } = usePlanet();
+  const { planetName } = usePlanetKey();
   const { data: arbitersTable, isLoading: isArbitersTableLoading } = useQuery({
     queryKey: [`worker-arbiters-${planetName}`],
     queryFn: () => getArbiters(planetName),
