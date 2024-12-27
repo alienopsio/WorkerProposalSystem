@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ReactNode, createContext } from "react";
-import { usePlanet } from "../hook/usePlanet";
+import { usePlanetKey } from "../hook/usePlanet";
 import { getVotes } from "../services/votes.service";
 
 export interface Vote {
@@ -29,7 +29,7 @@ type VotesProviderProps = {
 };
 
 export const VotesProvider = ({ children }: VotesProviderProps) => {
-  const { planetName } = usePlanet();
+  const { planetName } = usePlanetKey();
   const { data: votesTable, isLoading: isVotesTableLoading } = useQuery({
     queryKey: [`worker-votes-${planetName}`],
     queryFn: () => getVotes(planetName),
