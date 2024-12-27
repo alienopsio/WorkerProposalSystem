@@ -1,19 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePlanet } from "./usePlanet";
+import { usePlanetKey } from "./usePlanet";
 import { useAuth } from "./useAuth";
 
 export const useCustomers = () => {
   const [isCustomer, setIsCustomer] = useState<boolean>(false);
 
   const { activeUserData } = useAuth();
-  const { planet } = usePlanet();
+  const { planet } = usePlanetKey();
 
   useEffect(() => {
     async function checkIfCustomer() {
+      console.log("Checking if customer");
       if (activeUserData && planet) {
         const playerAccount = activeUserData.actor.toString();
+        
+      console.log("Active user data", playerAccount);
+      console.log("Planet", planet.key);
         const customers = (
           await activeUserData.client.v1.chain.get_table_rows({
             code: "prop.worlds",
@@ -30,6 +34,7 @@ export const useCustomers = () => {
 
         const isCustomerAccount = customers.includes(playerAccount);
         setIsCustomer(isCustomerAccount);
+        console.log("Is customer", isCustomerAccount);
       }
     }
     checkIfCustomer();
