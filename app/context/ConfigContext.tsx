@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ReactNode, createContext } from "react";
-import { usePlanet } from "../hook/usePlanet";
+import { usePlanetKey } from "../hook/usePlanet";
 import { useAuth } from "../hook/useAuth";
 import { getVariables } from "../services/variables.service";
 
@@ -24,7 +24,7 @@ type ConfigsProviderProps = {
 };
 
 export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
-  const { planetName } = usePlanet();
+  const { planetName } = usePlanetKey();
   const { data: configsTable, isLoading: isConfigsTableLoading } = useQuery({
     queryKey: [`contract-config-${planetName}`],
     queryFn: () => getVariables(planetName),

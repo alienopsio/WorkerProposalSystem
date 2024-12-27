@@ -3,13 +3,13 @@
 import useFiltersCards from "@/app/hook/useFiltersCards";
 import { ProposalCards } from "../content/proposal-cards";
 import { useQuery } from "@tanstack/react-query";
-import { usePlanet } from "@/app/hook/usePlanet";
+import { usePlanetKey } from "@/app/hook/usePlanet";
 import { getProposals } from "@/app/services/proposals.service";
 import StatusBarPlanet from "../header/statusbar-planet";
 import FilterProposalBar from "../content/filter-proposal-bar";
 
 export default function WorkerProposalsLayout() {
-  const { planetName } = usePlanet();
+  const { planetName } = usePlanetKey();
 
   const { data: proposalsTable, isLoading: isProposalsTableLoading } = useQuery(
     {
