@@ -1,6 +1,6 @@
 import Modal, {ModalProps} from "react-responsive-modal";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { usePlanet } from "@/app/hook/usePlanet";
+import { usePlanet,usePlanetKey } from "@/app/hook/usePlanet";
 import { useAuth } from "@/app/hook/useAuth";
 import { AnyAction } from "@wharfkit/session";
 import generateRandomId from "@/app/common/constants/generate-random-id.constant";
@@ -70,7 +70,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
   } = useForm<ICreateProposalInput>();
 
   const { activeUserData } = useAuth();
-  const { planetName } = usePlanet();
+  const { planetName } = usePlanetKey();
   const { isCustomer } = useCustomers();
 
   const { arbiters } = useArbiters();
