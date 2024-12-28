@@ -122,7 +122,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
           },
           proposal_pay: {
             contract: tokenContract,
-            quantity: `120.0000 ${tokenSymbol}`,
+            quantity: `${data.amount}.0000 ${tokenSymbol}`,
           },
           summary: data.description,
           content_hash: data.url,
