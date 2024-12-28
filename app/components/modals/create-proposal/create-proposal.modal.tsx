@@ -99,7 +99,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
         authorization: [{ actor: activeUserData.actor, permission: "active" }],
         data: {
           from:activeUserData.actor,
-          to:tokenContract,
+          to: propWorldsContract,
           quantity: `120.0000 ${tokenSymbol}`,
           memo: ""
         }
