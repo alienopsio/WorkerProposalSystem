@@ -112,7 +112,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
         data: {
           proposer: activeUserData.actor.toString(),
           title: data.title,
-          amount: data.amount,
+          proposalPay: data.amount,
           execution_time: data.executionTime,
           url: data.url,
           arbiter: data.arbiterWallet,
@@ -122,7 +122,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
           },
           proposal_pay: {
             contract: tokenContract,
-            quantity: `120.0000 ${tokenSymbol}`,
+            quantity: `${data.proposalPay}.0000 ${tokenSymbol}`,
           },
           summary: data.description,
           content_hash: data.url,
