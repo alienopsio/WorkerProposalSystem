@@ -24,10 +24,10 @@ type ConfigsProviderProps = {
 };
 
 export const ConfigsProvider = ({ children }: ConfigsProviderProps) => {
-  const { planetName } = usePlanetKey();
+  const { planetNameKey } = usePlanetKey();
   const { data: configsTable, isLoading: isConfigsTableLoading } = useQuery({
-    queryKey: [`contract-config-${planetName}`],
-    queryFn: () => getVariables(planetName),
+    queryKey: [`contract-config-${planetNameKey}`],
+    queryFn: () => getVariables(planetNameKey),
     refetchInterval: 10000,
     retry: 3,
     retryDelay: 2000,

@@ -1,6 +1,6 @@
 import Modal, { ModalProps } from "react-responsive-modal";
 import { Button } from "../../generic/buttons/button";
-import { usePlanet } from "@/app/hook/usePlanet";
+import { usePlanet,usePlanetKey } from "@/app/hook/usePlanet";
 import { useAuth } from "@/app/hook/useAuth";
 import { AnyAction } from "@wharfkit/session";
 import { useFeedbackModal } from "@/app/hook/useFeedbackModal";
@@ -34,6 +34,8 @@ export const HighlightProposalModal = ({
   const { handleShowFeedbackModal } = useFeedbackModal();
 
   const { planetName, planet } = usePlanet();
+  const { planetNameKey } = usePlanetKey();
+
   const { isCustodian } = useCustodians();
   const { activeUserData } = useAuth();
 
@@ -109,7 +111,7 @@ export const HighlightProposalModal = ({
         ],
         data: {
           custodian: activeUserData.actor.toString(),
-          dac_id: planetName,
+          dac_id: planetNameKey,
           proposal_id: proposalData.id,
           vote,
         },
