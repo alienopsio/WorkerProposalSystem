@@ -29,10 +29,10 @@ type VotesProviderProps = {
 };
 
 export const VotesProvider = ({ children }: VotesProviderProps) => {
-  const { planetName } = usePlanetKey();
+  const { planetNameKey } = usePlanetKey();
   const { data: votesTable, isLoading: isVotesTableLoading } = useQuery({
-    queryKey: [`worker-votes-${planetName}`],
-    queryFn: () => getVotes(planetName),
+    queryKey: [`worker-votes-${planetNameKey}`],
+    queryFn: () => getVotes(planetNameKey),
     refetchInterval: 10000,
     retry: 3,
     retryDelay: 2000,

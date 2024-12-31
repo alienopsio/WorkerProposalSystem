@@ -9,12 +9,12 @@ import StatusBarPlanet from "../header/statusbar-planet";
 import FilterProposalBar from "../content/filter-proposal-bar";
 
 export default function WorkerProposalsLayout() {
-  const { planetName } = usePlanetKey();
+  const { planetNameKey } = usePlanetKey();
 
   const { data: proposalsTable, isLoading: isProposalsTableLoading } = useQuery(
     {
-      queryKey: [`worker-proposals-${planetName}`],
-      queryFn: () => getProposals(planetName),
+      queryKey: [`worker-proposals-${planetNameKey}`],
+      queryFn: () => getProposals(planetNameKey),
       refetchInterval: 10000,
       retry: 3,
       retryDelay: 2000,

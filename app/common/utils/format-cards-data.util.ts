@@ -66,7 +66,7 @@ export function formatCardsData(
       description: card.summary,
       owner: card.proposer,
       arbiter: card.arbiter,
-      cost: card.arbiter_pay.quantity,
+      cost: card.proposal_pay.quantity,
       duration: new Date(card.expiry),
       votes: [],
       votesFinal: [],

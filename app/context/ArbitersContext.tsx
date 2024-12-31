@@ -21,10 +21,10 @@ type ArbitersProviderProps = {
 };
 
 export const ArbitersProvider = ({ children }: ArbitersProviderProps) => {
-  const { planetName } = usePlanetKey();
+  const { planetNameKey } = usePlanetKey();
   const { data: arbitersTable, isLoading: isArbitersTableLoading } = useQuery({
-    queryKey: [`worker-arbiters-${planetName}`],
-    queryFn: () => getArbiters(planetName),
+    queryKey: [`worker-arbiters-${planetNameKey}`],
+    queryFn: () => getArbiters(planetNameKey),
     refetchInterval: 10000,
     retry: 3,
     retryDelay: 2000,
