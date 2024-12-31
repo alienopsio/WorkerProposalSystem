@@ -442,12 +442,6 @@ export const HighlightProposalModal = ({
                   Cost: {proposalData.cost}
                 </span>
               </div>
-              <div>
-                Status : {proposalData?.status} 
-              </div>
-              <div>
-                isFinalizing : {isFinalizing}
-              </div>
               {!isFinalizing && !isCompletedFinal && (
                 <>
                   <div className="flex items-center gap-2 mt-4">
