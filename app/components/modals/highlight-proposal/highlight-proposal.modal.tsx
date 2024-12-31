@@ -453,14 +453,14 @@ export const HighlightProposalModal = ({
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      1Votes: {proposalData.votes.length}/{proposalData.votesNeeded}{" "}
+                      Votes: {proposalData.votes.length}/{proposalData.votesNeeded}{" "}
                       <b>({reachedVotes ? "Reached ✅" : "Not Reached ⏳"})</b>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      1Deny Votes: {proposalData.votesDeny.length}/{proposalData.votesNeeded}{" "}
+                      Deny Votes: {proposalData.votesDeny.length}/{proposalData.votesNeeded}{" "}
                       <b>{reachedDenyVotesForFinalizing && "Denied 🟥"}</b>
                     </span>
                   </div>
@@ -471,14 +471,14 @@ export const HighlightProposalModal = ({
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      2Votes: {proposalData?.votesFinal.length ?? 0}/{proposalData.votesNeeded}{" "}
+                      Votes: {proposalData?.votesFinal.length ?? 0}/{proposalData.votesNeeded}{" "}
                       <b>({reachedVotesForFinalizing ? "Reached Final Votes✅": "Not Reached Final Votes⏳"})</b>
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
-                      2Votes Deny: {finalizingDenyVotesForProposal.length ?? 0}/{proposalData.votesNeeded}{" "}
+                      Votes Deny: {finalizingDenyVotesForProposal.length ?? 0}/{proposalData.votesNeeded}{" "}
                       <b>({reachedDenyVotesForFinalizing && "Denied 🟥"})</b>
                     </span>
                   </div>

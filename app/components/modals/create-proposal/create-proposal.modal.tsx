@@ -70,7 +70,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
   } = useForm<ICreateProposalInput>();
 
   const { activeUserData } = useAuth();
-  const { planetName } = usePlanetKey();
+  const { planetNameKey } = usePlanetKey();
   const { isCustomer } = useCustomers();
 
   const { arbiters } = useArbiters();
@@ -82,7 +82,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
       if (!activeUserData?.actor) {
         throw new Error("No active user data found");
       }
-      const isTestaPlanet = planetName === "testa";
+      const isTestaPlanet = planetNameKey === "testa";
       const tokenSymbol = isTestaPlanet ? testTokenSymbol : mainTokenSymbol;
       const tokenContract = isTestaPlanet
         ? testTokenContract
@@ -129,7 +129,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
           id: generateRandomId(),
           category: 0,
           job_duration: executionTimeToDuration[data.executionTime as ExecutionTime],
-          dac_id: planetName,
+          dac_id: planetNameKey,
         },
       };
       if (process.env.NEXT_PUBLIC_TRANSFER === 'True') {
