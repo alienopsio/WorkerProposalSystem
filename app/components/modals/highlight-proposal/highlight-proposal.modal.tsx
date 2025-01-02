@@ -55,6 +55,7 @@ export const HighlightProposalModal = ({
     proposalData?.owner === activeUserData?.actor.toString();
 
   const isProgress = proposalData?.status === "in_progress";
+
   const canStartWork =
     reachedVotes &&
     isAproved &&
@@ -400,7 +401,7 @@ export const HighlightProposalModal = ({
         closeIcon: { fill: "#fff" },
       }}
     >
-      <>
+      <>      
         {proposalData?.status && (
           <div className="flex flex-col">
             <div
@@ -442,6 +443,7 @@ export const HighlightProposalModal = ({
                   Cost: {proposalData.cost}
                 </span>
               </div>
+
               {!isFinalizing && !isCompletedFinal && (
                 <>
                   <div className="flex items-center gap-2 mt-4">
@@ -460,9 +462,10 @@ export const HighlightProposalModal = ({
                   </div>
                 </>
               )}
-              {isFinalizing || isCompletedFinal && (
+              
+              {(isFinalizing || isCompletedFinal) && (
                 <>
-                  <div className="flex items-center gap-2 mt-4">
+                <div className="flex items-center gap-2 mt-4">
                     <VotesIcon width={20} height={20} />
                     <span className="text-white text-lg">
                       Votes: {proposalData?.votesFinal.length ?? 0}/{proposalData.votesNeeded}{" "}
@@ -478,6 +481,7 @@ export const HighlightProposalModal = ({
                   </div>
                 </>
               )}
+              
               <div className="flex items-center gap-2 mt-4">
                 <DurationIcon width={20} height={20} />
                 <span className="text-white text-lg">
@@ -498,7 +502,8 @@ export const HighlightProposalModal = ({
                     View Documentation
                   </a>
                 </div>
-              )}              
+              )}
+                            
               {!canStartWork &&  (
                 <>
                   {canVote && !isCompletedFinalizing &&
