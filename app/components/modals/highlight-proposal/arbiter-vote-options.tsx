@@ -2,7 +2,7 @@ import { useAuth } from "@/app/hook/useAuth";
 import { Button } from "../../generic/buttons/button";
 import { useFeedbackModal } from "@/app/hook/useFeedbackModal";
 import { AnyAction } from "@wharfkit/session";
-import { usePlanet } from "@/app/hook/usePlanet";
+import { usePlanetKey } from "@/app/hook/usePlanet";
 import { propWorldsContract } from "@/app/common/constants/token.constant";
 
 export const ArbiterVoteOptions = ({
@@ -14,7 +14,7 @@ export const ArbiterVoteOptions = ({
 }) => {
   const { handleShowFeedbackModal } = useFeedbackModal();
   const { activeUserData } = useAuth();
-  const { planetName } = usePlanet();
+  const { planetNameKey } = usePlanetKey();
 
   const handleArbiterVote = async (vote: string) => {
     try {
@@ -37,7 +37,7 @@ export const ArbiterVoteOptions = ({
         ],
         data: {
           arbiter: activeUserData.actor.toString(),
-          dac_id: planetName,
+          dac_id: planetNameKey,
           proposal_id: proposalId,
         },
       };
