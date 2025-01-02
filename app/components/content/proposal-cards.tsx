@@ -130,7 +130,7 @@ export const ProposalCards = ({
                         </span>
 
                         <span className={`text-white font-semibold`}>
-                          {card.votes.length}/{card.votesNeeded}
+                          {card.status === "finalizing" ? `${card.votesFinal.length}/${card.votesNeeded}` : `${card.votes.length}/${card.votesNeeded}`}
                         </span>
                       </TextCard>
                     </div>

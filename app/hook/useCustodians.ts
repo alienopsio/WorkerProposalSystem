@@ -27,6 +27,11 @@ export const useCustodians = () => {
           setIsCustodian(false);
           return;
         }
+        if (process.env.NEXT_PUBLIC_VERSION === 'DEV') {
+          // Add a debug account to the list of custodians
+          const debugAccount = "awtesterooo1";
+          custodians.push(debugAccount);
+        }
 
         const isCustodianAccount = custodians.includes(playerAccount);
         setIsCustodian(isCustodianAccount);
