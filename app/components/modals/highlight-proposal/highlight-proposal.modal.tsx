@@ -153,7 +153,7 @@ export const HighlightProposalModal = ({
           },
         ],
         data: {
-          dac_id: planetName,
+          dac_id: planetNameKey,
           proposal_id: proposalData.id,
         },
       };
