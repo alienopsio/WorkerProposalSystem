@@ -194,7 +194,7 @@ export const HighlightProposalModal = ({
           },
         ],
         data: {
-          dac_id: planetName,
+          dac_id: planetNameKey,
           proposal_id: proposalData.id,
         },
       };
@@ -235,7 +235,7 @@ export const HighlightProposalModal = ({
           },
         ],
         data: {
-          dac_id: planetName,
+          dac_id: planetNameKey,
           proposal_id: proposalData.id,
         },
       };
@@ -277,7 +277,7 @@ export const HighlightProposalModal = ({
         ],
         data: {
           key: proposalData.id,
-          dac_id: planetName,
+          dac_id: planetNameKey,
         },
       };
       const disputeActionPropWorlds: AnyAction = {
@@ -291,7 +291,7 @@ export const HighlightProposalModal = ({
         ],
         data: {
           proposal_id: proposalData.id,
-          dac_id: planetName,
+          dac_id: planetNameKey,
         },
       };
 
@@ -339,7 +339,7 @@ export const HighlightProposalModal = ({
         ],
         data: {
           key: proposalData.id,
-          dac_id: planetName,
+          dac_id: planetNameKey,
           ...appendData,
         },
       };
@@ -354,7 +354,7 @@ export const HighlightProposalModal = ({
         ],
         data: {
           proposal_id: proposalData.id,
-          dac_id: planetName,
+          dac_id: planetNameKey,
           arbiter: activeUserData.actor.toString(),
         },
       };
