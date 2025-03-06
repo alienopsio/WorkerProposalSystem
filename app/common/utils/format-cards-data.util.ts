@@ -26,6 +26,14 @@ export function formatCardsData(
 
       case PROPOSAL_STATE_ENUM.STATE_HAS_ENOUGH_APP_VOTES:
         status = "voting";
+        if (status !== "expired") {
+          const expiryDate = new Date(card.expiry);
+
+          if (expiryDate < new Date()) {
+            status = "expired";
+          }
+        }
+        
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_IN_PROGRESS:
