@@ -13,10 +13,27 @@ export function formatCardsData(
     switch (card.state) {
       case PROPOSAL_STATE_ENUM.STATE_PENDING_APPROVAL:
         status = "voting";
+        
+        if (status !== "expired") {
+          const expiryDate = new Date(card.expiry);
+
+          if (expiryDate < new Date()) {
+            status = "expired";
+          }
+        }
+
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_HAS_ENOUGH_APP_VOTES:
         status = "voting";
+        if (status !== "expired") {
+          const expiryDate = new Date(card.expiry);
+
+          if (expiryDate < new Date()) {
+            status = "expired";
+          }
+        }
+        
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_IN_PROGRESS:
@@ -48,14 +65,6 @@ export function formatCardsData(
         break;
     }
 
-    if (status !== "expired") {
-      const expiryDate = new Date(card.expiry);
-
-      if (expiryDate < new Date()) {
-        status = "expired";
-      }
-    }
-
     const minVotes = planets.find(
       (planet) => planet.name === planetName
     )?.minVote;
@@ -67,7 +76,8 @@ export function formatCardsData(
       owner: card.proposer,
       arbiter: card.arbiter,
       cost: card.proposal_pay.quantity,
-      duration: new Date(card.expiry),
+      expiry: new Date(card.expiry),
+      job_duration	: card.job_duration,
       votes: [],
       votesFinal: [],
       votesNeeded: minVotes || 3,

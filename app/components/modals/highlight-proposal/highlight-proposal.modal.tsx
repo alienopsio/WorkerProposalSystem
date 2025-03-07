@@ -4,7 +4,7 @@ import { usePlanet,usePlanetKey } from "@/app/hook/usePlanet";
 import { useAuth } from "@/app/hook/useAuth";
 import { AnyAction } from "@wharfkit/session";
 import { useFeedbackModal } from "@/app/hook/useFeedbackModal";
-import { CardData } from "@/app/common/utils/generate-card-data.util";
+import { CardData,format_job_Duration } from "@/app/common/utils/generate-card-data.util";
 import {
   ByIcon,
   DurationIcon,
@@ -485,7 +485,14 @@ export const HighlightProposalModal = ({
               <div className="flex items-center gap-2 mt-4">
                 <DurationIcon width={20} height={20} />
                 <span className="text-white text-lg">
-                  Duration: {moment(proposalData.duration).fromNow()}
+                  Vote Period Expire: {moment(proposalData.expiry).fromNow()}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 mt-4">
+                <DurationIcon width={20} height={20} />
+                <span className="text-white text-lg">
+                Proposal Duration: {format_job_Duration(proposalData.job_duration)}
                 </span>
               </div>
               <div className="mt-6">

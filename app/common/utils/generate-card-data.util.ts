@@ -2,6 +2,22 @@ import { v4 as uuid } from "uuid";
 import { customAlphabet } from "nanoid";
 import { Vote } from "@/app/context/VotesContext";
 
+export const format_job_Duration = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  if (hours < 24) {
+    return `${hours} hour${hours !== 1 ? 's' : ''}`;
+  } else if (hours < 24 * 7) {
+    const days = Math.floor(hours / 24);
+    return `${days} day${days !== 1 ? 's' : ''}`;
+  } else if (hours < 24 * 30) {
+    const weeks = Math.floor(hours / (24 * 7));
+    return `${weeks} week${weeks !== 1 ? 's' : ''}`;
+  } else {
+    const months = Math.floor(hours / (24 * 30));
+    return `${months} month${months !== 1 ? 's' : ''}`;
+  }
+};
+
 export const CardStatus = {
   all_proposals: "all_proposals",
   voting: "voting",
@@ -20,7 +36,8 @@ export interface CardData {
   owner: string;
   arbiter: string;
   cost: string;
-  duration: Date;
+  expiry: Date;
+  job_duration: number;
   votes: Vote[];
   votesFinal: Vote[];
   votesDeny: Vote[];
@@ -96,8 +113,9 @@ class GenerateFakeCardData {
   };
 
   generateCardData(): CardData {
-    const duration = this.date.future();
+    const expiry = this.date.future();
     const randomStatus = this.random.number(0, 6);
+    const job_duration = this.random.number(1, 30);
     return {
       id: uuid(),
       title: this.lorem.words(3),
@@ -105,7 +123,8 @@ class GenerateFakeCardData {
       owner: this.name.wallet(),
       arbiter: this.name.wallet(),
       cost: this.finance.amount(1, 100) + " TLM",
-      duration,
+      expiry,
+      job_duration,
       votes: [],
       votesFinal: [],
       votesDeny: [],

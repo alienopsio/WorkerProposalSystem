@@ -10,6 +10,7 @@ import {
 import {
   CardData,
   CardStatus,
+  format_job_Duration,
 } from "../../common/utils/generate-card-data.util";
 import { TuseFiltersCards } from "../../hook/useFiltersCards";
 import moment from "moment";
@@ -109,18 +110,34 @@ export const ProposalCards = ({
                           {card.cost}
                         </span>
                       </TextCard>
+
                       <TextCard>
                         <span
                           style={{ color: cardColor }}
                           className={`flex gap-2 text-base items-center `}
                         >
-                          <DurationIcon height={18} width={18} /> Duration:
+                          <DurationIcon height={18} width={18} /> Vote Period Expire:
                         </span>
 
                         <span className={`text-white font-semibold`}>
-                          {moment(moment(card.duration), "YYYYMMDD").fromNow()}
+                          {moment(moment(card.expiry), "YYYYMMDD").fromNow()}
                         </span>
                       </TextCard>
+
+
+                      <TextCard>
+                        <span
+                          style={{ color: cardColor }}
+                          className={`flex gap-2 text-base items-center `}
+                        >
+                          <DurationIcon height={18} width={18} /> Proposal Duration :
+                        </span>
+                        <span className={`text-white font-semibold`}>
+                          {format_job_Duration(card.job_duration)}
+                        </span>
+                        
+                      </TextCard>
+
                       <TextCard>
                         <span
                           style={{ color: cardColor }}
