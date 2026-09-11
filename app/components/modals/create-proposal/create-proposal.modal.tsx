@@ -78,7 +78,6 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
 
   const onSubmit: SubmitHandler<ICreateProposalInput> = async (data) => {
     try {
-      console.log(data);
       if (!activeUserData?.actor) {
         throw new Error("No active user data found");
       }

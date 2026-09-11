@@ -3,8 +3,7 @@ import { Darker_Grotesque } from "next/font/google";
 import "./globals.css";
 import "react-responsive-modal/styles.css";
 import { Provider } from "./providers";
-import Head from 'next/head';
-import GoogleAnalytics from './GoogleAnalytics';
+import GoogleAnalytics from "./GoogleAnalytics";
 
 const darkerGrotesque = Darker_Grotesque({ subsets: ["latin"] });
 
@@ -19,10 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">  
-      <Head>
+    <html lang="en">
+      <head>
         <meta name="color-scheme" content="only light" />
-      </Head>
+      </head>
       <GoogleAnalytics />
 
       <body className={darkerGrotesque.className}>

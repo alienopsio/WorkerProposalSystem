@@ -1,5 +1,4 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import { useAuth } from "../../hook/useAuth";
 import { Button } from "../generic/buttons/button";
 

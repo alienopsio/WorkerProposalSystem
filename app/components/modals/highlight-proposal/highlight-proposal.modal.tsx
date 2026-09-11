@@ -97,6 +97,14 @@ export const HighlightProposalModal = ({
         return;
       }
 
+      if (!planet?.address) {
+        handleShowFeedbackModal(true, {
+          message: "Planet DAC account is missing. Cannot vote.",
+          type: "error",
+        });
+        return;
+      }
+
       const voteProposalAction: AnyAction = {
         account: propWorldsContract,
         name: voteAction,
@@ -106,7 +114,7 @@ export const HighlightProposalModal = ({
             permission: "active",
           },
           {
-            actor: planet?.address ?? "testadacdacc",
+            actor: planet.address,
             permission: "one",
           },
         ],
@@ -505,6 +513,7 @@ export const HighlightProposalModal = ({
                     className="text-xl font-bold  animate-pulse text-[#00FFFF]"
                     href={`https://ipfs.alienworlds.io/ipfs/${proposalData.contentHash}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     View Documentation
                   </a>

@@ -12,30 +12,35 @@ export const useCustodians = () => {
 
   useEffect(() => {
     async function checkIfCustodian() {
-      if (activeUserData && planet) {
-        const playerAccount = activeUserData.actor.toString();
-        const custodians = (
-          await activeUserData.client.v1.chain.get_table_rows({
-            code: "dao.worlds",
-            scope: planet.key,
-            table: "custodians1",
-            limit: 1000,
-          })
-        ).rows.map((row) => row.cust_name);
-
-        if (custodians.length === 0) {
-          setIsCustodian(false);
-          return;
-        }
-        if (process.env.NEXT_PUBLIC_VERSION === 'DEV') {
-          // Add a debug account to the list of custodians
-          const debugAccount = "awtesterooo1";
-          custodians.push(debugAccount);
-        }
-
-        const isCustodianAccount = custodians.includes(playerAccount);
-        setIsCustodian(isCustodianAccount);
+      if (!activeUserData || !planet) {
+        setIsCustodian(false);
+        return;
       }
+
+      const playerAccount = activeUserData.actor.toString();
+      const custodians = (
+        await activeUserData.client.v1.chain.get_table_rows({
+          code: "dao.worlds",
+          scope: planet.key,
+          table: "custodians1",
+          limit: 1000,
+        })
+      ).rows.map((row) => row.cust_name);
+
+      if (custodians.length === 0) {
+        setIsCustodian(false);
+        return;
+      }
+
+      // DEV tester only on testa. Do not inject onto live planet lists if DEV is mis-set.
+      if (
+        process.env.NEXT_PUBLIC_VERSION === "DEV" &&
+        planet.key === "testa"
+      ) {
+        custodians.push("awtesterooo1");
+      }
+
+      setIsCustodian(custodians.includes(playerAccount));
     }
     checkIfCustodian();
   }, [activeUserData, planet]);

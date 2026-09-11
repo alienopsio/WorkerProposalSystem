@@ -22,22 +22,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [sessionKit, setSessionKit] = useState<SessionKit | null>(null)
   const [isFirstTime, setIsFirstTime] = useState(true)
 
-  // Init function or SessionKit
   useEffect(() => {
     async function initSession() {
       const newSessionKit = await createSessionKit()
       setSessionKit(newSessionKit)
     }
 
-    //Function to verify if it is the first time the user is accessing the site
     function checkFirstTime() {
-      
       const visited = localStorage.getItem('visited')
-      console.log("checkFirstTime before visited", visited)
       if (visited) {
-        setIsFirstTime(false) // Not first time
+        setIsFirstTime(false)
       } else {
-        setIsFirstTime(true) // Is first time
+        setIsFirstTime(true)
       }
     }
 
@@ -45,7 +41,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     initSession()
   }, [])
 
-  // Restore session
   useEffect(() => {
     if (sessionKit) {
       sessionKit.restore().then((restoredSession) => {
@@ -55,21 +50,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, [sessionKit])
 
-  // login function
   const signIn = async () => {
     if (!sessionKit) return
     const { session } = await sessionKit.login()
 
-    // It checks if it is the first time the user is accessing the site if not create the localStorage item
-    console.log("signIn before isFirstTime", isFirstTime)
     if (isFirstTime) {
-      localStorage.setItem('visited', 'true') // Set the item to true
+      localStorage.setItem('visited', 'true')
     }
 
     setActiveUserData(session)
   }
 
-  // Logout function
   const signOut = async () => {
     if (!sessionKit) return
     await sessionKit.logout()

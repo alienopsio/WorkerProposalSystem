@@ -21,9 +21,14 @@ export const LoginFrame = () => {
         >
           <article className={`flex flex-col gap-6 justify-center items-center`}>
             <div className="flex flex-col text-[#00FFFF] justify-center items-center max-w-[250px]">
-              <span className="cursor-pointer font-bold text-sm" onClick={() => open("https://alienops.io/wps/documentation/")}>
+              <a
+                className="cursor-pointer font-bold text-sm"
+                href="https://alienops.io/wps/documentation/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 READ THE DOCUMENTATION
-              </span>
+              </a>
               <hr className="w-full border-[#00FFFF]" />
             </div>
             <h3 className={`uppercase text-3xl font-light !tracking-[.07em]`}>
@@ -56,6 +61,7 @@ export const LoginFrame = () => {
           <Link
             href={"https://www.mycloudwallet.com/dashboard"}
             target="_blank"
+            rel="noopener noreferrer"
             className={`text-[#00FFFF] cursor-pointer`}
           >
             Sign Up here

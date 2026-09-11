@@ -12,30 +12,27 @@ export const useCustomers = () => {
 
   useEffect(() => {
     async function checkIfCustomer() {
-      console.log("Checking if customer");
-      if (activeUserData && planet) {
-        const playerAccount = activeUserData.actor.toString();
-        
-      console.log("Active user data", playerAccount);
-      console.log("Planet", planet.key);
-        const customers = (
-          await activeUserData.client.v1.chain.get_table_rows({
-            code: "prop.worlds",
-            table: "recwl",
-            scope: planet.key,
-            limit: 1000,
-          })
-        ).rows.map((row) => row.receiver);
-
-        if (customers.length === 0) {
-          setIsCustomer(false);
-          return;
-        }
-
-        const isCustomerAccount = customers.includes(playerAccount);
-        setIsCustomer(isCustomerAccount);
-        console.log("Is customer", isCustomerAccount);
+      if (!activeUserData || !planet) {
+        setIsCustomer(false);
+        return;
       }
+
+      const playerAccount = activeUserData.actor.toString();
+      const customers = (
+        await activeUserData.client.v1.chain.get_table_rows({
+          code: "prop.worlds",
+          table: "recwl",
+          scope: planet.key,
+          limit: 1000,
+        })
+      ).rows.map((row) => row.receiver);
+
+      if (customers.length === 0) {
+        setIsCustomer(false);
+        return;
+      }
+
+      setIsCustomer(customers.includes(playerAccount));
     }
     checkIfCustomer();
   }, [activeUserData, planet]);
