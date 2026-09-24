@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SelectPlanets } from "../content/select-planets";
 import { LoginButton } from "../generic/buttons/login-button";
 import { setUserProperties, trackEvent } from "../../GAnalytics";
+import { DEPLOY_VERSION } from "../../common/constants/deploy-version.constant";
 
 export const LoginFrame = () => {
   const handleVisitorClick = () => {    
@@ -68,6 +69,7 @@ export const LoginFrame = () => {
           </Link>{" "}
         </span>
         <span>Created by AlienOPs.io</span>
+        <span>{DEPLOY_VERSION}</span>
       </span>
     </main>
   );
