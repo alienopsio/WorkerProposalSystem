@@ -21,7 +21,7 @@ import { useVotes } from "@/app/hook/useVotes";
 import { getShowName } from "@/app/common/utils/get-card-show-name.util";
 import { propWorldsContract } from "@/app/common/constants/token.constant";
 import { useEscrowLock } from "@/app/hook/useEscrowLock";
-import { mapChainError } from "@/app/common/utils/map-chain-error.util";
+import { isEscrowAuthFailure, mapChainError } from "@/app/common/utils/map-chain-error.util";
 
 interface HighlightProposalModalProps extends ModalProps {
   // Define props here
@@ -265,8 +265,12 @@ export const HighlightProposalModal = ({
         type: "success",
       });
     } catch (error: any) {
+      const raw = error?.message ?? error?.toString();
+      const message = isEscrowAuthFailure(raw)
+        ? "Finalize was rejected by account permissions. The deployed escrow needs escrw.worlds@approve and the linkauth entries used by prop.worlds."
+        : mapChainError(raw);
       handleShowFeedbackModal(true, {
-        message: mapChainError(error?.message ?? error?.toString()),
+        message,
         type: "error",
       });
     }
