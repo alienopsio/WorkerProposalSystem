@@ -20,6 +20,7 @@ import { useCustodians } from "@/app/hook/useCustodians";
 import { useVotes } from "@/app/hook/useVotes";
 import { getShowName } from "@/app/common/utils/get-card-show-name.util";
 import { propWorldsContract } from "@/app/common/constants/token.constant";
+import { useEscrowLock } from "@/app/hook/useEscrowLock";
 
 interface HighlightProposalModalProps extends ModalProps {
   // Define props here
@@ -82,8 +83,13 @@ export const HighlightProposalModal = ({
     isProposalOwner && isFinalizing && reachedDenyVotesForFinalizing;
 
   const isInDispute = proposalData?.status === "in_dispute";
-
-  const canArbiterInDispute = isInDispute && isArbiter;
+  const escrowGate = useEscrowLock(
+    planet?.key,
+    proposalData?.id,
+    Boolean(isInDispute && isArbiter)
+  );
+  const escrowReady = escrowGate === "locked";
+  const canArbiterInDispute = isInDispute && isArbiter && escrowReady;
 
   const handleVoteProposal = async (vote: string) => {
     const voteAction = isFinalizing ? "votepropfin" : "voteprop";
@@ -319,6 +325,17 @@ export const HighlightProposalModal = ({
         return;
       }
 
+      if (!isInDispute || escrowGate !== "locked") {
+        const message =
+          escrowGate === "missing"
+            ? "Escrow for this proposal was not found. Approve and Reject stay unavailable."
+            : escrowGate === "unlocked"
+              ? "Escrow exists but is not locked. Approve and Reject stay unavailable."
+              : "Proposal and escrow data are not ready. Approve and Reject stay unavailable.";
+        handleShowFeedbackModal(true, { message, type: "error" });
+        return;
+      }
+
       const arbiterActionPropWorlds: AnyAction = {
         account: propWorldsContract,
         name: propAction,
@@ -546,6 +563,17 @@ export const HighlightProposalModal = ({
                     Dispute Proposal
                   </Button>
                 </div>
+              )}
+              {isInDispute && isArbiter && !canArbiterInDispute && (
+                <p className="text-white text-center mt-6">
+                  {escrowGate === "loading"
+                    ? "Checking escrow lock before arbiter actions."
+                    : escrowGate === "missing"
+                      ? "No escrow row for this proposal. Approve and Reject stay hidden."
+                      : escrowGate === "unlocked"
+                        ? "Escrow is not locked. Approve and Reject stay hidden."
+                        : "Escrow status could not be read. Approve and Reject stay hidden."}
+                </p>
               )}
               {canArbiterInDispute && (
                 // approve or reject
