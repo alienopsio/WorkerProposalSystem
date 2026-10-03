@@ -42,9 +42,10 @@ export function mapChainError(raw: string | undefined): string {
 
 export function isEscrowAuthFailure(raw: string | undefined): boolean {
   const text = (raw ?? "").toLowerCase();
-  return (
+  const mentionsEscrow = text.includes("escrw.worlds");
+  const authRejected =
     text.includes("unsatisfied authorization") ||
     text.includes("missing authority") ||
-    text.includes("does not satisfy declared authorizations")
-  );
+    text.includes("does not satisfy declared authorizations");
+  return mentionsEscrow && authRejected;
 }
