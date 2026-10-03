@@ -3,6 +3,11 @@ import { CardData } from "./generate-card-data.util";
 import { PROPOSAL_STATE_ENUM } from "../constants/state.constant";
 import { planets } from "../constants/planets.constant";
 
+/** Prefer the renamed field. Fall back so this branch still renders on the current chain. */
+export function approvalWindowValue(card: DataProposalCard): string | undefined {
+  return card.approval_expiry ?? card.expiry;
+}
+
 export function formatCardsData(
   data: DataProposalCard[],
   planetName: string
@@ -15,9 +20,9 @@ export function formatCardsData(
         status = "voting";
         
         if (status !== "expired") {
-          const expiryDate = new Date(card.expiry);
+          const expiryDate = new Date(approvalWindowValue(card) ?? "");
 
-          if (expiryDate < new Date()) {
+          if (approvalWindowValue(card) && expiryDate < new Date()) {
             status = "expired";
           }
         }
@@ -27,9 +32,9 @@ export function formatCardsData(
       case PROPOSAL_STATE_ENUM.STATE_HAS_ENOUGH_APP_VOTES:
         status = "voting";
         if (status !== "expired") {
-          const expiryDate = new Date(card.expiry);
+          const expiryDate = new Date(approvalWindowValue(card) ?? "");
 
-          if (expiryDate < new Date()) {
+          if (approvalWindowValue(card) && expiryDate < new Date()) {
             status = "expired";
           }
         }
@@ -76,7 +81,7 @@ export function formatCardsData(
       owner: card.proposer,
       arbiter: card.arbiter,
       cost: card.proposal_pay.quantity,
-      expiry: new Date(card.expiry),
+      expiry: new Date(approvalWindowValue(card) ?? ""),
       job_duration	: card.job_duration,
       votes: [],
       votesFinal: [],

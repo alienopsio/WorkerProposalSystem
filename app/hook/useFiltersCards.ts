@@ -24,7 +24,10 @@ export interface DataProposalCard {
   category: number | boolean;
   content_hash: string;
   created_at: string;
-  expiry: string;
+  /** Live chain field. After the contract rename this is absent. */
+  expiry?: string;
+  /** Approval window. Present after the contract field rename. */
+  approval_expiry?: string;
   job_duration: number;
   proposal_id: number;
   proposal_pay: PayContract;
