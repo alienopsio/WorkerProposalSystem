@@ -33,7 +33,6 @@ export function useEscrowLock(
           scope: dacScope,
           table: "escrows",
           lower_bound: proposalKey,
-          upper_bound: proposalKey,
           limit: 1,
         });
         const row = result.rows.find(
