@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Name } from "@wharfkit/antelope";
 import { useAuth } from "./useAuth";
 
 export type EscrowGate = "loading" | "missing" | "unlocked" | "locked" | "unavailable";
@@ -32,7 +33,7 @@ export function useEscrowLock(
           code: "escrw.worlds",
           scope: dacScope,
           table: "escrows",
-          lower_bound: proposalKey,
+          lower_bound: Name.from(proposalKey),
           limit: 1,
         });
         const row = result.rows.find(
