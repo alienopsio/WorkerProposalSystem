@@ -11,9 +11,11 @@ export const useCustodians = () => {
   const { planet } = usePlanet();
 
   useEffect(() => {
+    let cancelled = false;
+
     async function checkIfCustodian() {
       if (!activeUserData || !planet) {
-        setIsCustodian(false);
+        if (!cancelled) setIsCustodian(false);
         return;
       }
 
@@ -26,6 +28,8 @@ export const useCustodians = () => {
           limit: 1000,
         })
       ).rows.map((row) => row.cust_name);
+
+      if (cancelled) return;
 
       if (custodians.length === 0) {
         setIsCustodian(false);
@@ -43,6 +47,9 @@ export const useCustodians = () => {
       setIsCustodian(custodians.includes(playerAccount));
     }
     checkIfCustodian();
+    return () => {
+      cancelled = true;
+    };
   }, [activeUserData, planet]);
 
   return { isCustodian };

@@ -11,9 +11,11 @@ export const useCustomers = () => {
   const { planet } = usePlanetKey();
 
   useEffect(() => {
+    let cancelled = false;
+
     async function checkIfCustomer() {
       if (!activeUserData || !planet) {
-        setIsCustomer(false);
+        if (!cancelled) setIsCustomer(false);
         return;
       }
 
@@ -27,6 +29,8 @@ export const useCustomers = () => {
         })
       ).rows.map((row) => row.receiver);
 
+      if (cancelled) return;
+
       if (customers.length === 0) {
         setIsCustomer(false);
         return;
@@ -35,6 +39,9 @@ export const useCustomers = () => {
       setIsCustomer(customers.includes(playerAccount));
     }
     checkIfCustomer();
+    return () => {
+      cancelled = true;
+    };
   }, [activeUserData, planet]);
 
   return { isCustomer };
