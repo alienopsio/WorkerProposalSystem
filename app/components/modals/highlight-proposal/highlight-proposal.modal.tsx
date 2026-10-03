@@ -21,6 +21,7 @@ import { useVotes } from "@/app/hook/useVotes";
 import { getShowName } from "@/app/common/utils/get-card-show-name.util";
 import { propWorldsContract } from "@/app/common/constants/token.constant";
 import { useEscrowLock } from "@/app/hook/useEscrowLock";
+import { mapChainError } from "@/app/common/utils/map-chain-error.util";
 
 interface HighlightProposalModalProps extends ModalProps {
   // Define props here
@@ -142,7 +143,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
@@ -183,7 +184,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
@@ -224,7 +225,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
@@ -265,7 +266,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
@@ -306,7 +307,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
@@ -364,7 +365,7 @@ export const HighlightProposalModal = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }

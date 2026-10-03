@@ -4,6 +4,7 @@ import { useFeedbackModal } from "@/app/hook/useFeedbackModal";
 import { AnyAction } from "@wharfkit/session";
 import { usePlanetKey } from "@/app/hook/usePlanet";
 import { propWorldsContract } from "@/app/common/constants/token.constant";
+import { mapChainError } from "@/app/common/utils/map-chain-error.util";
 
 export const ArbiterVoteOptions = ({
   proposalId,
@@ -57,7 +58,7 @@ export const ArbiterVoteOptions = ({
       });
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }

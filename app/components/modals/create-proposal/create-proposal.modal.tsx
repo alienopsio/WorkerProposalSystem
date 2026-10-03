@@ -17,6 +17,7 @@ import { useBalance } from "@/app/hook/useBalance";
 import { Input } from "../../generic/input";
 import { Button } from "../../generic/buttons/button";
 import { useCustomers } from "@/app/hook/useKYC";
+import { mapChainError } from "@/app/common/utils/map-chain-error.util";
 import FileUpload from "./file-upload";
 
 interface CreateProposalModalProps extends ModalProps {
@@ -158,7 +159,7 @@ export const CreateProposalModal = ({ onClose, open: openModal }: CreateProposal
       reset();
     } catch (error: any) {
       handleShowFeedbackModal(true, {
-        message: error?.message ?? error?.toString() ?? "An error occurred",
+        message: mapChainError(error?.message ?? error?.toString()),
         type: "error",
       });
     }
