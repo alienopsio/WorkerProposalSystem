@@ -275,20 +275,6 @@ export const HighlightProposalModal = ({
         return;
       }
 
-      const disputeActionEscrwWorlds: AnyAction = {
-        account: "escrw.worlds",
-        name: "dispute",
-        authorization: [
-          {
-            actor: activeUserData.actor,
-            permission: "active",
-          },
-        ],
-        data: {
-          key: proposalData.id,
-          dac_id: planetNameKey,
-        },
-      };
       const disputeActionPropWorlds: AnyAction = {
         account: propWorldsContract,
         name: "dispute",
@@ -305,7 +291,7 @@ export const HighlightProposalModal = ({
       };
 
       await activeUserData.transact({
-        actions: [disputeActionEscrwWorlds, disputeActionPropWorlds],
+        actions: [disputeActionPropWorlds],
       });
 
       handleShowFeedbackModal(true, {
@@ -322,8 +308,7 @@ export const HighlightProposalModal = ({
 
   const handleArbiterDisputeWorkProposal = async (vote: string) => {
     const isDeny = vote === "deny";
-    const firstAction = isDeny ? "disapprove" : "approve";
-    const secondAction = isDeny ? "arbdeny" : "arbapprove";
+    const propAction = isDeny ? "arbdeny" : "arbapprove";
 
     try {
       if (!activeUserData?.actor) {
@@ -334,27 +319,9 @@ export const HighlightProposalModal = ({
         return;
       }
 
-      const appendData = isDeny
-        ? { disapprover: activeUserData.actor.toString() }
-        : { approver: activeUserData.actor.toString() };
-      const arbiterActionEscrwWorlds: AnyAction = {
-        account: "escrw.worlds",
-        name: firstAction,
-        authorization: [
-          {
-            actor: activeUserData.actor,
-            permission: "active",
-          },
-        ],
-        data: {
-          key: proposalData.id,
-          dac_id: planetNameKey,
-          ...appendData,
-        },
-      };
       const arbiterActionPropWorlds: AnyAction = {
         account: propWorldsContract,
-        name: secondAction,
+        name: propAction,
         authorization: [
           {
             actor: activeUserData.actor,
@@ -369,7 +336,7 @@ export const HighlightProposalModal = ({
       };
 
       await activeUserData.transact({
-        actions: [arbiterActionEscrwWorlds, arbiterActionPropWorlds],
+        actions: [arbiterActionPropWorlds],
       });
 
       const feedbackMessage = isDeny ? "The Worker Proposal is disputed and denied." : "The Worker Proposal is disputed and approved.";
