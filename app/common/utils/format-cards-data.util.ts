@@ -18,27 +18,12 @@ export function formatCardsData(
     switch (card.state) {
       case PROPOSAL_STATE_ENUM.STATE_PENDING_APPROVAL:
         status = "voting";
-        
-        if (status !== "expired") {
-          const expiryDate = new Date(approvalWindowValue(card) ?? "");
-
-          if (approvalWindowValue(card) && expiryDate < new Date()) {
-            status = "expired";
-          }
-        }
-
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_HAS_ENOUGH_APP_VOTES:
+        // approval_expiry is the approval window, not proof the job is dead.
+        // Start Work follows this contract state.
         status = "voting";
-        if (status !== "expired") {
-          const expiryDate = new Date(approvalWindowValue(card) ?? "");
-
-          if (approvalWindowValue(card) && expiryDate < new Date()) {
-            status = "expired";
-          }
-        }
-        
         break;
 
       case PROPOSAL_STATE_ENUM.STATE_IN_PROGRESS:
